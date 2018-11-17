@@ -6,8 +6,6 @@ const Header = styled.View`
     align-items: center;
     justify-content: space-between;
     display: flex;
-    border-bottom-width: 0.5;
-    border-bottom-color: black;
     margin-bottom: 15;
 `;
 

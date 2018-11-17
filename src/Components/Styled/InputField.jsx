@@ -13,9 +13,9 @@ import {
 const InputField = props => (
     <Wrapper style={{
         ...props.style,
-        borderColor: props.error ? RED : GRAY,
+        borderColor: 'transparent',
         backgroundColor:
-            props.error ? RED : GRAY
+            props.error ? RED : 'transparent'
     }}>
         <InputFieldStyle
             {...R.omit(['error'])(props)}
@@ -38,19 +38,22 @@ const InputFieldStyle = styled.TextInput`
     font-size: 18;
     font-family: Ubuntu;
     flex: 1;
+    background-color: white;
+    opacity: 0.75
+    width: 100%;
 `;
 
 const Wrapper = styled.View`
-    padding-left: 18;
-    padding-right: 18;
     border-width: 1;
     width: 100vw;
-    height: 400;
+    height: 200;
     flex: 1;
     align-self: center; 
     justify-content: center;
     align-content: center;
     border-radius: 20;
+    marginTop: 40;
+    
 `;
 
 export default InputField;

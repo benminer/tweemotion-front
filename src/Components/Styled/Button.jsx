@@ -85,7 +85,7 @@ const LoadingSpacer = styled.View`
 `;
 
 const ButtonContainer = styled.View`
-    border-radius: 50;
+    border-radius: 10;
     padding-top: 16;
     padding-bottom: 16;
     padding-left: 36;
@@ -95,7 +95,7 @@ const ButtonContainer = styled.View`
     margin-horizontal: 50;
     margin: 0;
     margin-bottom: 12;
-    background-color: ${BLUE};
+    background-color: white;
     cursor: pointer;
     shadow-radius: 8;
     shadow-color: ${BLACK};
