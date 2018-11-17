@@ -89,13 +89,13 @@ const Main = props => {
                             </ButtonTouchable>
                         </View>
                     { props.showAbout ?
-                        <View style={{ backgroundColor: 'transparent', alignSelf: 'center', alignItems: 'center', marginTop: 20 }}>
+                        <View style={{ backgroundColor: 'transparent', alignSelf: 'center', alignItems: 'center', marginTop: 20, flex: 1 }}>
                             <Text style={{
                                 fontFamily: 'Ubuntu',
                                 fontSize: 18,
                                 color: 'white',
                                 textAlign: 'center',
-                                marginHorizontal: 300
+                                marginHorizontal: isActiveMobile ? 50 : 10
                             }}>
                                 {about}
                             </Text>
@@ -106,7 +106,7 @@ const Main = props => {
                             :
                             props.isLoading ?
                                 <Center>
-                                    <ActivityIndicator size={150} color='white' />
+                                    <ActivityIndicator size={50} color='white' />
                                 </Center>
                                 :
                                 <View>
