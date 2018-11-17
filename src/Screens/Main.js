@@ -13,9 +13,16 @@ const toggleChart = curry((props, _e) => {
     
 });
 
-// const setDataForChart = curry((props, _e) => {
-//     // props.setChartData
-// })
+const showAboutText = curry((props, _e) => {
+    props.setShowAbout(true);
+});
+
+const showTryItOut = curry((props, _e) => {
+    if (props.showChart) {
+        props.setShowChart(false);
+    }
+    props.setShowAbout(false);
+})
 
 const data = {
     labels: [
@@ -42,8 +49,11 @@ const MainLogic = compose(
     withState('chartData', 'setChartData', data),
     withState('isLoading', 'setIsLoading', false),
     withState('showChart', 'setShowChart', false),
+    withState('showAbout', 'setShowAbout', false),
     withHandlers({
-        toggleChart
+        toggleChart,
+        showAboutText,
+        showTryItOut
     })
 )(Main);
 

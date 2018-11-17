@@ -3,6 +3,7 @@ import * as R from 'ramda';
 import isMobile from '../util/isMobile';
 
 import Button from './Styled/Button';
+import ButtonTouchable from './Styled/ButtonTouchable';
 import Container from './Styled/Container';
 import Center from './Styled/Center';
 import Chart from './Chart';
@@ -11,6 +12,7 @@ import InputBackground from './Styled/InputBackground';
 import InputField from './Styled/InputField';
 import Gradient from './Styled/Gradient';
 import { GridWhole } from './Styled/Grid';
+import about from '../data/about';
 
 // import {
 //     BLACK,
@@ -59,38 +61,80 @@ const Main = props => {
                     }}>
                         Tweemotion is an AI Research project conducted by Nick Chouard and Ben Miner.
                     </Text>
-                    { props.showChart ?
+                        <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                            <ButtonTouchable
+                                isLoading={false}
+                                onPress={props.showAboutText}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    alignSelf: 'flex-start'
+                                }}
+                            >
+                                <Text>
+                                    About
+                                </Text>
+                            </ButtonTouchable>
+                            <View style={{ width: 100 }} />
+                            <ButtonTouchable
+                                isLoading={false}
+                                onPress={props.showTryItOut}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                    alignSelf: 'flex-start'
+                                }}
+                            >
+                                <Text>
+                                    Try it Out
+                                </Text>
+                            </ButtonTouchable>
+                        </View>
+                    { props.showAbout ?
+                        <View style={{ backgroundColor: 'transparent', alignSelf: 'center', alignItems: 'center', marginTop: 20 }}>
+                            <Text style={{
+                                fontFamily: 'Ubuntu',
+                                fontSize: 18,
+                                color: 'white',
+                                textAlign: 'center',
+                                marginHorizontal: 300
+                            }}>
+                                {about}
+                            </Text>
+                        </View>
+                    :
+                        props.showChart ?
                             <Chart data={props.chartData} />
                             :
                             props.isLoading ?
-                            <Center>
-                                <ActivityIndicator size={150} color='white' />
-                            </Center>
-                            :
-                            <InputBackground style={{ backgroundColor: 'transparent' }}>
-                                <GridWhole>
-                                    <InputField
-                                        placeholder={'Write some tex here...'}
-                                        style={{ backgroundColor: 'transparent' }}
-                                    />
-                                </GridWhole>
-                            </InputBackground>
+                                <Center>
+                                    <ActivityIndicator size={150} color='white' />
+                                </Center>
+                                :
+                                <View>
+                                    <InputBackground style={{ backgroundColor: 'transparent' }}>
+                                        <GridWhole>
+                                            <InputField
+                                                placeholder={'Write some tex here...'}
+                                                style={{ backgroundColor: 'transparent' }}
+                                            />
+                                        </GridWhole>
+                                    </InputBackground>
+                                    <Button
+                                        isLoading={false}
+                                        onPress={props.toggleChart}
+                                        style={{ marginTop: 50 }}
+                                    >
+                                        <Text style={{
+                                            fontFamily: 'Ubuntu',
+                                            fontSize: isActiveMobile ? 16 : 20,
+                                            top: 20,
+                                            marginTop: 10,
+                                            color: 'black'
+                                        }}>
+                                            Submit
+                                        </Text>
+                                    </Button>
+                                </View>
                     }
-                    <Button
-                        isLoading={false}
-                        onPress={props.toggleChart}
-                        style={{ marginTop: 50 }}
-                    >
-                        <Text style={{
-                            fontFamily: 'Ubuntu',
-                            fontSize: isActiveMobile ? 16 : 20,
-                            top: 20,
-                            marginTop: 10,
-                            color: 'black'
-                        }}>
-                            Submit
-                        </Text>
-                    </Button>
                 </View>
             </Center>
             </Gradient>
