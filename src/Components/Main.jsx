@@ -19,6 +19,8 @@ import {
 
 import { View, Text } from 'react-native';
 
+// var BarGraph = require('react-chartjs').Pie;
+
 export const preventSubmit =
     R.tap(e => e && e.preventDefault());
 
@@ -58,13 +60,24 @@ const Main = props => {
                     }}>
                         Tweemotion is an AI Research project conducted by Nick Chouard and Ben Miner.
                     </Text>
-                    <InputBackground style={{ backgroundColor: GRAY }}>
+                    {/* <InputBackground style={{ backgroundColor: GRAY }}>
                         <GridWhole>
                             <InputField 
                                 placeholder={'Write some text here...'}
                             />
                         </GridWhole>
-                    </InputBackground>
+                    </InputBackground> */}
+                    {/* <BarGraph
+                        data={chartData}
+                        options={{
+                            backgroundColor: 'white',
+                            borderColor: BLUE,
+                            borderWidth: 2,
+                            hoverBackgroundColor: GRAY
+                        }}
+                        width='400'
+                        height='400'
+                    /> */}
                     {/* <View style={{ height: 75 }} /> */}
                     <Button
                         isLoading={false}

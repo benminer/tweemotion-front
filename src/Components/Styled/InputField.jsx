@@ -21,7 +21,12 @@ const InputField = props => (
             {...R.omit(['error'])(props)}
             style={{
                 color: props.error ? RED : BLACK,
-                padding: 5
+                padding: 5,
+                shadowRadius: 10,
+                shadowOffset: { height: 10 },
+                shadowColor: BLACK,
+                shadowOpacity: 0.7,
+                borderRadius: 8
             }}
             placeholderTextColor={ props.error ? RED : 'white' }
             multiline={true}
