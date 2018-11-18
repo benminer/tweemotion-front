@@ -21,13 +21,12 @@ import about from '../data/about';
 //     GRAY
 // } from '../Style/Colors';
 
-import { View, Text, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
 
 export const preventSubmit =
     R.tap(e => e && e.preventDefault());
 
 const Main = props => {
-    console.log(props);
     const isActiveMobile = isMobile();
     return (
         <Container>
@@ -42,7 +41,7 @@ const Main = props => {
             }}>
                 <View style={{ flex: 1, width: '100%', paddingTop: 0, alignContent: 'center' }}>
                     <Text style={{
-                        fontFamily: 'Ubuntu',
+                        fontFamily: 'Montserrat',
                         fontSize: 25,
                         color: 'white',
                         alignSelf: 'center'
@@ -50,7 +49,7 @@ const Main = props => {
                         Welcome to Tweemotion!
                     </Text>
                     <Text style={{
-                        fontFamily: 'Ubuntu',
+                        fontFamily: 'Montserrat',
                         fontSize: 20,
                         color: 'white',
                         alignSelf: 'center',
@@ -61,16 +60,18 @@ const Main = props => {
                     }}>
                         Tweemotion is an AI Research project conducted by Nick Chouard and Ben Miner.
                     </Text>
+                    <View style={{ height: 20 }} />
                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                             <ButtonTouchable
                                 isLoading={false}
                                 onPress={props.showAboutText}
                                 style={{
                                     backgroundColor: 'transparent',
-                                    alignSelf: 'flex-start'
+                                    alignSelf: 'flex-start',
+                                    borderBottomColor: 'white', borderBottomWidth: 0.5,
                                 }}
                             >
-                                <Text>
+                                <Text style={{  color: 'white', fontFamily: 'Montserrat', fontSize: 16 }}>
                                     About
                                 </Text>
                             </ButtonTouchable>
@@ -80,26 +81,32 @@ const Main = props => {
                                 onPress={props.showTryItOut}
                                 style={{
                                     backgroundColor: 'transparent',
-                                    alignSelf: 'flex-start'
+                                    alignSelf: 'flex-start',
+                                    borderBottomColor: 'white', borderBottomWidth: 0.5,
                                 }}
                             >
-                                <Text>
+                                <Text style={{ color: 'white', fontFamily: 'Montserrat', fontSize: 16 }}>
                                     Try it Out
                                 </Text>
                             </ButtonTouchable>
                         </View>
                     { props.showAbout ?
-                        <View style={{ backgroundColor: 'transparent', alignSelf: 'center', alignItems: 'center', marginTop: 20, flex: 1 }}>
+                        <ScrollView 
+                            contentContainerStyle={{ alignItems: 'center' }}
+                            style={{ backgroundColor: 'transparent', alignSelf: 'center', marginTop: 20 }}
+                        >
                             <Text style={{
-                                fontFamily: 'Ubuntu',
+                                fontFamily: 'Montserrat',
                                 fontSize: 18,
                                 color: 'white',
                                 textAlign: 'center',
-                                marginHorizontal: isActiveMobile ? 50 : 10
+                                marginHorizontal: isActiveMobile ? 5 : 10
                             }}>
                                 {about}
+                                {about}
+                                {about}
                             </Text>
-                        </View>
+                        </ScrollView>
                     :
                         props.showChart ?
                             <Chart data={props.chartData} />
@@ -124,7 +131,7 @@ const Main = props => {
                                         style={{ marginTop: 50 }}
                                     >
                                         <Text style={{
-                                            fontFamily: 'Ubuntu',
+                                            fontFamily: 'Montserrat',
                                             fontSize: isActiveMobile ? 16 : 20,
                                             top: 20,
                                             marginTop: 10,
