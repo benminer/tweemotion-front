@@ -21,7 +21,6 @@ export const preventSubmit =
 
 const Main = props => {
     const isActiveMobile = isMobile();
-    console.log(isActiveMobile, 'is mobile');
     return (
         <Container>
             <Gradient>
@@ -137,7 +136,8 @@ const Main = props => {
                                         backgroundColor: 'transparent',
                                         alignSelf: 'center',
                                         borderBottomColor: 'white', borderBottomWidth: 0.5,
-                                        marginTop: 50
+                                        marginTop: 50,
+                                        marginBottom: 100
                                     }}
                                 >
                                     <Text style={{ color: 'white', fontFamily: 'Montserrat', fontSize: 16 }}>

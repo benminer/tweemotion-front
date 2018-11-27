@@ -8,15 +8,20 @@ const Chart = props => {
             <Text style={{ fontFamily: 'Montserrat-SemiBold', fontSize: 22, textAlign: 'center', color: 'black' }}>
                 {props.text}
             </Text>
-            {/* <View style={{ height: 10 }} /> */}
-            { props.showChart && <Doughnut
-                data={props.data}
-                width={props.isMobile ? 250 : 500}
-                height={props.isMobile ? 250 : 500}
-                options={{
-                    maintainAspectRatio: false
-                }}
-            /> }
+            { props.showChart && props.isMobile ?
+                <Doughnut
+                    data={props.data}
+                    width={250}
+                    height={250}
+                    options={{
+                        maintainAspectRatio: false
+                    }}
+                /> 
+                :
+                <Doughnut
+                    data={props.data}
+                /> 
+            }
             { props.showTextResponse && 
                 <Text style={{ fontFamily: 'Montserrat', fontSize: 22, textAlign: 'center', color: 'black' }}>
                     {props.textSentiment}
