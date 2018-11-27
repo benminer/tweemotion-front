@@ -11,8 +11,8 @@ const Chart = props => {
             {/* <View style={{ height: 10 }} /> */}
             { props.showChart && <Doughnut
                 data={props.data}
-                width={props.isMobile ? 70 : 20}
-                height={props.isMobile ? 70 : 20}
+                width={props.isMobile ? 250 : 500}
+                height={props.isMobile ? 250 : 500}
                 options={{
                     maintainAspectRatio: false
                 }}
