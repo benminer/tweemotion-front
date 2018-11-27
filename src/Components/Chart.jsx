@@ -11,11 +11,11 @@ const Chart = props => {
             <View style={{ height: 10 }} />
             { props.showChart && <Doughnut
                 data={props.data}
-                width={20}
-                height={20}
-                options={{
-                    maintainAspectRatio: false
-                }}
+                // width={20}
+                // height={20}
+                // options={{
+                //     maintainAspectRatio: false
+                // }}
             /> }
             { props.showTextResponse && 
                 <Text style={{ fontFamily: 'Montserrat', fontSize: 22, textAlign: 'center', color: 'black' }}>
