@@ -7,13 +7,14 @@ import {
     RED,
     // BLUE,
     BLACK,
-    GRAY
+    // GRAY
 } from '../../Style/Colors';
 
 const InputField = props => (
     <Wrapper style={{
         ...props.style,
         borderColor: 'transparent',
+        height: props.height,
         backgroundColor:
             props.error ? RED : 'transparent'
     }}>
@@ -28,8 +29,9 @@ const InputField = props => (
                 shadowOpacity: 0.7,
                 borderRadius: 8
             }}
+            onChangeText={text => props.onChangeText(text)}
             placeholderTextColor={ props.error ? RED : 'white' }
-            multiline={true}
+            multiline={props.multiline}
         />
     </Wrapper>
 );
@@ -46,7 +48,6 @@ const InputFieldStyle = styled.TextInput`
 const Wrapper = styled.View`
     border-width: 1;
     width: 100vw;
-    height: 200;
     flex: 1;
     align-self: center; 
     justify-content: center;

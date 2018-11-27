@@ -1,16 +1,25 @@
 import Main from '../Components/Main';
 
 // import { componentDidUpdate } from 'react-functional-lifecycle';
+// import { postData } from '../api';
 import { compose, withState, withHandlers } from 'recompose';
 import { curry } from 'ramda';
 
-const toggleChart = curry((props, _e) => {
+const submitHashtag = curry((props, _e) => {
     props.setIsLoading(true);
+    // props.setPredictResponse()
     setTimeout(() => {
         props.setIsLoading(false);
         props.setShowChart(!props.showChart);
     }, 1000)
-    
+});
+
+const submitText = curry((props, _e) => {
+    props.setIsLoading(true);
+})
+
+const onChangeText = curry((props, e) => {
+    props.setEnteredText(e);
 });
 
 const showAboutText = curry((props, _e) => {
@@ -18,11 +27,9 @@ const showAboutText = curry((props, _e) => {
 });
 
 const showTryItOut = curry((props, _e) => {
-    if (props.showChart) {
-        props.setShowChart(false);
-    }
+    props.setShowChart(false);
     props.setShowAbout(false);
-})
+});
 
 const data = {
     labels: [
@@ -50,10 +57,14 @@ const MainLogic = compose(
     withState('isLoading', 'setIsLoading', false),
     withState('showChart', 'setShowChart', false),
     withState('showAbout', 'setShowAbout', false),
+    withState('enteredText', 'setEnteredText', ''),
+    withState('predictResponse', 'setPredictResponse', ''),
     withHandlers({
-        toggleChart,
+        submitHashtag,
+        submitText,
         showAboutText,
-        showTryItOut
+        showTryItOut,
+        onChangeText
     })
 )(Main);
 

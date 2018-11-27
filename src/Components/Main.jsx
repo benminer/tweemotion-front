@@ -14,14 +14,7 @@ import Gradient from './Styled/Gradient';
 import { GridWhole } from './Styled/Grid';
 import about from '../data/about';
 
-// import {
-//     BLACK,
-//     BLUE,
-//     WHITE,
-//     GRAY
-// } from '../Style/Colors';
-
-import { ScrollView, View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 export const preventSubmit =
     R.tap(e => e && e.preventDefault());
@@ -47,18 +40,6 @@ const Main = props => {
                         alignSelf: 'center'
                     }}>
                         Welcome to Tweemotion!
-                    </Text>
-                    <Text style={{
-                        fontFamily: 'Montserrat',
-                        fontSize: 20,
-                        color: 'white',
-                        alignSelf: 'center',
-                        alignContent: 'center',
-                        textAlign: 'center',
-                        marginTop: 5,
-                        marginBottom: 30
-                    }}>
-                        Tweemotion is an AI Research project conducted by Nick Chouard and Ben Miner.
                     </Text>
                     <View style={{ height: 20 }} />
                         <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
@@ -86,30 +67,58 @@ const Main = props => {
                                 }}
                             >
                                 <Text style={{ color: 'white', fontFamily: 'Montserrat', fontSize: 16 }}>
-                                    Try it Out
+                                    Enter Text
                                 </Text>
                             </ButtonTouchable>
                         </View>
                     { props.showAbout ?
-                        <ScrollView 
-                            contentContainerStyle={{ alignItems: 'center' }}
-                            style={{ backgroundColor: 'transparent', alignSelf: 'center', marginTop: 20 }}
+                        <View 
+                            style={{ backgroundColor: 'transparent', alignSelf: 'center', marginTop: 20, alignItems: 'center'  }}
                         >
                             <Text style={{
                                 fontFamily: 'Montserrat',
                                 fontSize: 18,
                                 color: 'white',
+                                alignSelf: 'center',
+                                alignContent: 'center',
                                 textAlign: 'center',
-                                marginHorizontal: isActiveMobile ? 5 : 10
+                                marginTop: 5,
+                                marginBottom: 30
                             }}>
-                                {about}
-                                {about}
-                                {about}
-                            </Text>
-                        </ScrollView>
+                                Tweemotion is an AI Research project conducted by Nick Chouard and Ben Miner.
+                             </Text>
+                            {about.map(section => (
+                                <View key={section.title}>
+                                    <Text
+                                        style={{ 
+                                            fontFamily: 'Montserrat-Bold',
+                                            fontSize: 25,
+                                            color: 'white',
+                                            textAlign: 'center',
+                                            marginHorizontal: isActiveMobile ? 5 : 10
+                                        }}
+                                    >
+                                        {section.title}
+                                    </Text>
+                                    <View style={{ height: 10 }} />
+                                    <Text
+                                        style={{
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 15,
+                                            color: 'white',
+                                            textAlign: 'center',
+                                            marginHorizontal: isActiveMobile ? 5 : 10,
+                                            marginBottom: 10
+                                        }}
+                                    >
+                                        {section.words}
+                                    </Text>
+                                </View>
+                            ))}
+                        </View>
                     :
                         props.showChart ?
-                            <Chart data={props.chartData} />
+                            <Chart data={props.chartData} text={props.enteredText} />
                             :
                             props.isLoading ?
                                 <Center>
@@ -117,30 +126,70 @@ const Main = props => {
                                 </Center>
                                 :
                                 <View>
-                                    <InputBackground style={{ backgroundColor: 'transparent' }}>
-                                        <GridWhole>
-                                            <InputField
-                                                placeholder={'Write some tex here...'}
-                                                style={{ backgroundColor: 'transparent' }}
-                                            />
-                                        </GridWhole>
-                                    </InputBackground>
-                                    <Button
-                                        isLoading={false}
-                                        onPress={props.toggleChart}
-                                        style={{ marginTop: 50 }}
-                                    >
-                                        <Text style={{
-                                            fontFamily: 'Montserrat',
-                                            fontSize: isActiveMobile ? 16 : 20,
-                                            top: 20,
-                                            marginTop: 10,
-                                            color: 'black'
-                                        }}>
-                                            Submit
+                                    <View style={{ marginTop: 50, alignContent: 'center', justifyContent: 'center' }}>
+                                        <InputBackground style={{ backgroundColor: 'transparent' }}>
+                                                <Text style={{ textAlign: 'left', fontSize: 15, color: 'white', fontFamily: 'Montserrat'}}>
+                                                    Type anything to have its sentiment analyzed!
+                                                </Text>
+                                            <GridWhole>
+                                                <InputField
+                                                    height={200}
+                                                    multiline={true}
+                                                    onChangeText={props.onChangeText}
+                                                    placeholder={'Write some text here...'}
+                                                    style={{ backgroundColor: 'transparent' }}
+                                                />
+                                            </GridWhole>
+                                        </InputBackground>
+                                        <Button
+                                            isLoading={false}
+                                            onPress={props.submitText}
+                                            style={{ marginTop: 50 }}
+                                        >
+                                            <Text style={{
+                                                fontFamily: 'Montserrat',
+                                                fontSize: isActiveMobile ? 13 : 20,
+                                                top: 20,
+                                                marginTop: 10,
+                                                color: 'black'
+                                            }}>
+                                                Submit Custom Text
                                         </Text>
-                                    </Button>
+                                        </Button>
+                                    </View>
+                                    <View style={{ marginTop: 50, alignContent: 'center', justifyContent: 'center' }}>
+                                        <InputBackground style={{ backgroundColor: 'transparent' }}>
+                                            <Text style={{ textAlign: 'left', fontSize: 15, color: 'white', fontFamily: 'Montserrat' }}>
+                                                Enter in a hashtag to analyze 50 tweets containing it.
+                                            </Text>
+                                            <GridWhole>
+                                                <InputField
+                                                    height={50}
+                                                    multiline={false}
+                                                    onChangeText={props.onChangeText}
+                                                    placeholder={'Write some text here...'}
+                                                    style={{ backgroundColor: 'transparent' }}
+                                                />
+                                            </GridWhole>
+                                        </InputBackground>
+                                        <Button
+                                            isLoading={false}
+                                            onPress={props.submitHashtag}
+                                            style={{ marginTop: 50 }}
+                                        >
+                                            <Text style={{
+                                                fontFamily: 'Montserrat',
+                                                fontSize: isActiveMobile ? 13 : 20,
+                                                top: 20,
+                                                marginTop: 10,
+                                                color: 'black'
+                                            }}>
+                                                Submit Twitter Search
+                                    </Text>
+                                        </Button>
+                                    </View>
                                 </View>
+
                     }
                 </View>
             </Center>
