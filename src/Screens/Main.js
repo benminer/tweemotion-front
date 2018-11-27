@@ -51,7 +51,15 @@ const submitText = curry((props, _e) => {
                 props.setIsLoading(false);
             });
     }
-})
+});
+
+const resetField = curry((props, _e) => {
+    props.setTextSentiment('');
+    props.setEnteredTweetText('');
+    props.setEnteredText('');
+    props.setShowTextResponse(false);
+    props.setShowChart(false);
+});
 
 const onChangeText = curry((props, e) => props.setEnteredText(e))
 
@@ -96,14 +104,14 @@ const MainLogic = compose(
     withState('enteredText', 'setEnteredText', ''),
     withState('enteredTweetText', 'setEnteredTweetText', ''),
     withState('textSentiment', 'setTextSentiment', ''),
-    withState('predictResponse', 'setPredictResponse', ''),
     withHandlers({
         submitHashtag,
         submitText,
         showAboutText,
         showTryItOut,
         onChangeText,
-        onChangeTweetText
+        onChangeTweetText,
+        resetField
     })
 )(Main);
 

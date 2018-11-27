@@ -8,7 +8,7 @@ const Chart = props => {
             <Text style={{ fontFamily: 'Montserrat-SemiBold', fontSize: 22, textAlign: 'center', color: 'black' }}>
                 {props.text}
             </Text>
-            <View style={{ height: 10 }} />
+            {/* <View style={{ height: 10 }} /> */}
             { props.showChart && <Doughnut
                 data={props.data}
                 // width={20}

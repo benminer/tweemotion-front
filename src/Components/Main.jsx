@@ -118,14 +118,30 @@ const Main = props => {
                         </View>
                     :
                         props.showChart || props.showTextResponse ?
-                            <View style={{ backgroundColor: 'white', borderRadius: 20, margin: 50 }}>
-                                <Chart 
-                                    data={props.chartData} 
-                                    showChart={props.showChart} 
-                                    showTextResponse={props.showTextResponse}
-                                    textSentiment={props.textSentiment}
-                                    text={props.enteredText || props.enteredTweetText} 
-                                />
+                            <View>
+                                <View style={{ backgroundColor: 'white', borderRadius: 20, margin: 50 }}>
+                                    <Chart 
+                                        data={props.chartData} 
+                                        showChart={props.showChart} 
+                                        showTextResponse={props.showTextResponse}
+                                        textSentiment={props.textSentiment}
+                                        text={props.enteredText || props.enteredTweetText} 
+                                    />
+                                </View>
+                                <ButtonTouchable
+                                    isLoading={false}
+                                    onPress={props.resetField}
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                        alignSelf: 'center',
+                                        borderBottomColor: 'white', borderBottomWidth: 0.5,
+                                        marginTop: 50
+                                    }}
+                                >
+                                    <Text style={{ color: 'white', fontFamily: 'Montserrat', fontSize: 16 }}>
+                                        Reset
+                                    </Text>
+                                </ButtonTouchable>
                             </View>
                             :
                             props.isLoading ?
