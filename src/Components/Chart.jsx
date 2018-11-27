@@ -8,7 +8,7 @@ const Chart = props => {
             <Text style={{ fontFamily: 'Montserrat-SemiBold', fontSize: 22, textAlign: 'center', color: 'black' }}>
                 {props.text}
             </Text>
-            { props.showChart && props.isMobile ?
+            { props.showChart && props.isMobile &&
                 <Doughnut
                     data={props.data}
                     width={250}
@@ -17,7 +17,8 @@ const Chart = props => {
                         maintainAspectRatio: false
                     }}
                 /> 
-                :
+            }
+            { props.showChart && !props.isMobile &&
                 <Doughnut
                     data={props.data}
                 /> 
