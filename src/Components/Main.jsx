@@ -21,6 +21,7 @@ export const preventSubmit =
 
 const Main = props => {
     const isActiveMobile = isMobile();
+    console.log(isActiveMobile, 'is mobile');
     return (
         <Container>
             <Gradient>
@@ -126,6 +127,7 @@ const Main = props => {
                                         showTextResponse={props.showTextResponse}
                                         textSentiment={props.textSentiment}
                                         text={props.enteredText || props.enteredTweetText} 
+                                        isMobile={isActiveMobile}
                                     />
                                 </View>
                                 <ButtonTouchable
@@ -167,7 +169,7 @@ const Main = props => {
                                         </InputBackground>
                                         <Button
                                             isLoading={false}
-                                            onPress={props.submitText}
+                                            onPress={props.enteredText.length && props.submitText}
                                             style={{ marginTop: 50 }}
                                         >
                                             <Text style={{
@@ -198,7 +200,7 @@ const Main = props => {
                                         </InputBackground>
                                         <Button
                                             isLoading={false}
-                                            onPress={props.submitHashtag}
+                                            onPress={props.enteredTweetText.length && props.submitHashtag}
                                             style={{ marginTop: 50 }}
                                         >
                                             <Text style={{
