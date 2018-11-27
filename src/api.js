@@ -1,19 +1,15 @@
+import { create } from 'apisauce';
 
+const URL = 'https://tweemotion-back.herokuapp.com';
 
-const URL = ''
-
-const postData = data => {
-    return fetch(URL, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-};
+const api = create({
+    baseURL: URL,
+    headers: { 
+        'Access-Control-Allow-Origin': "*",
+        'Content-Type': 'application/json' 
+    }
+});
 
 export {
-    postData
+    api
 };

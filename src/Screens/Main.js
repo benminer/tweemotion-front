@@ -1,26 +1,61 @@
 import Main from '../Components/Main';
-
+import { path, prop, omit } from 'ramda';
 // import { componentDidUpdate } from 'react-functional-lifecycle';
-// import { postData } from '../api';
 import { compose, withState, withHandlers } from 'recompose';
 import { curry } from 'ramda';
+import { api } from '../api'
 
 const submitHashtag = curry((props, _e) => {
     props.setIsLoading(true);
-    // props.setPredictResponse()
-    setTimeout(() => {
-        props.setIsLoading(false);
-        props.setShowChart(!props.showChart);
-    }, 1000)
+    if (props.enteredTweetText) {
+        api.post('/tweets', { query: props.enteredTweetText })
+            .then(res => {
+                const response = path(['data', 'results'], res);
+                const newChartData = {
+                    labels: [
+                        'Negative',
+                        'Neutral',
+                        'Positive'
+                    ],
+                    datasets: [{
+                        data: [response.negative, response.neutral, response.positive],
+                        backgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56'
+                        ],
+                        hoverBackgroundColor: [
+                            '#FF6384',
+                            '#36A2EB',
+                            '#FFCE56'
+                        ]
+                    }]
+                };
+                props.setChartData(newChartData);
+                props.setIsLoading(false);
+                props.setShowChart(true);
+            })
+    }
 });
 
 const submitText = curry((props, _e) => {
     props.setIsLoading(true);
+    if (props.enteredText) {
+        api.post('/predict_tweet', {
+            tweet: props.enteredText
+        })
+            .then(res => {
+                const response = path(['data', 'sentiment'], res);
+                props.setTextSentiment(response);
+                props.setShowTextResponse(true);
+                props.setIsLoading(false);
+            });
+    }
 })
 
-const onChangeText = curry((props, e) => {
-    props.setEnteredText(e);
-});
+const onChangeText = curry((props, e) => props.setEnteredText(e))
+
+const onChangeTweetText = curry((props, e) => props.setEnteredTweetText(e));
 
 const showAboutText = curry((props, _e) => {
     props.setShowAbout(true);
@@ -38,7 +73,7 @@ const data = {
         'Yellow'
     ],
     datasets: [{
-        data: [300, 50, 100],
+        data: [27, 12, 11],
         backgroundColor: [
             '#FF6384',
             '#36A2EB',
@@ -57,14 +92,18 @@ const MainLogic = compose(
     withState('isLoading', 'setIsLoading', false),
     withState('showChart', 'setShowChart', false),
     withState('showAbout', 'setShowAbout', false),
+    withState('showTextResponse', 'setShowTextResponse', false),
     withState('enteredText', 'setEnteredText', ''),
+    withState('enteredTweetText', 'setEnteredTweetText', ''),
+    withState('textSentiment', 'setTextSentiment', ''),
     withState('predictResponse', 'setPredictResponse', ''),
     withHandlers({
         submitHashtag,
         submitText,
         showAboutText,
         showTryItOut,
-        onChangeText
+        onChangeText,
+        onChangeTweetText
     })
 )(Main);
 

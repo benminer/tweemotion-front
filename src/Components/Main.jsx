@@ -117,11 +117,19 @@ const Main = props => {
                             ))}
                         </View>
                     :
-                        props.showChart ?
-                            <Chart data={props.chartData} text={props.enteredText} />
+                        props.showChart || props.showTextResponse ?
+                            <View style={{ backgroundColor: 'white', borderRadius: 20, margin: 50 }}>
+                                <Chart 
+                                    data={props.chartData} 
+                                    showChart={props.showChart} 
+                                    showTextResponse={props.showTextResponse}
+                                    textSentiment={props.textSentiment}
+                                    text={props.enteredText || props.enteredTweetText} 
+                                />
+                            </View>
                             :
                             props.isLoading ?
-                                <Center>
+                                <Center style={{ marginTop: 100 }}>
                                     <ActivityIndicator size={50} color='white' />
                                 </Center>
                                 :
@@ -154,7 +162,7 @@ const Main = props => {
                                                 color: 'black'
                                             }}>
                                                 Submit Custom Text
-                                        </Text>
+                                            </Text>
                                         </Button>
                                     </View>
                                     <View style={{ marginTop: 50, alignContent: 'center', justifyContent: 'center' }}>
@@ -166,7 +174,7 @@ const Main = props => {
                                                 <InputField
                                                     height={50}
                                                     multiline={false}
-                                                    onChangeText={props.onChangeText}
+                                                    onChangeText={props.onChangeTweetText}
                                                     placeholder={'Write some text here...'}
                                                     style={{ backgroundColor: 'transparent' }}
                                                 />
