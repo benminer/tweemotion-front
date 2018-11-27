@@ -9,8 +9,7 @@ import Icon from './Icon';
 import styled from 'styled-components/native';
 
 import {
-    BLACK,
-    BLUE
+    BLACK
 } from '../../Style/Colors';
 
 export const Button = props => {

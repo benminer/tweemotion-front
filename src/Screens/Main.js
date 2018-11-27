@@ -1,6 +1,5 @@
 import Main from '../Components/Main';
-import { path, prop, omit } from 'ramda';
-// import { componentDidUpdate } from 'react-functional-lifecycle';
+import { path } from 'ramda';
 import { compose, withState, withHandlers } from 'recompose';
 import { curry } from 'ramda';
 import { api } from '../api'

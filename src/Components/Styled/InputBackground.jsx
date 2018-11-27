@@ -4,10 +4,6 @@ import styled from 'styled-components/native';
 
 import Responsive from './Responsive';
 
-import {
-    BLACK
-} from '../../Style/Colors'
-
 const LoginBackgroundDesktop = styled.View`
     padding-left: 50;
     padding-right: 50;
